@@ -21,10 +21,22 @@ class ProjectsController < ApplicationController
     if Participant.where(user: current_user, project: @project).exists?
       Participant.where(user: current_user, project: @project).delete_all
     else
-      Participant.create(user: current_user, project: @project)
+      if @project.participants.count >= @project.participant_limit 
+        flash[:alert] = "Participant limit reached"
+        redirect_to project_url(@project)
+        return
+      else
+        flash[:notice] = "You have joined the project"
+        Participant.create(user: current_user, project: @project)
+      end
     end
 
-    redirect_to project_url(@project)
+    respond_to do |format|
+      format.html { redirect_to project_url(@project) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/project", locals: { project: @project }) }
+    end
+    # redirect_to project_url(@project)
+
   end
 
   # GET /projects/1/edit
