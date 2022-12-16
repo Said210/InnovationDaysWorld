@@ -4,7 +4,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, :all
+    can :read, Project
+    can :create, Project
+    can :update, Project, owner: user
+
+    admin_abliity if user.role == "admin?"
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
@@ -28,5 +32,12 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
+  end
+
+  def exec_abliity
+  end
+
+  def admin_abliity
+    maange :edition
   end
 end
