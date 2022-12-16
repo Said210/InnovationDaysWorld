@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy join]
   before_action :authenticate_user!, except: %i[index show]
 
   # GET /projects or /projects.json
@@ -15,6 +15,16 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @technologies = Technology.all.pluck(:name).join(",")
+  end
+
+  def join
+    if Participant.where(user: current_user, project: @project).exists?
+      Participant.where(user: current_user, project: @project).destroy_all
+    else
+      Participant.create(user: current_user, project: @project)
+    end
+    
+    redirect_to project_url(@project)
   end
 
   # GET /projects/1/edit

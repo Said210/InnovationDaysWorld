@@ -18,8 +18,8 @@
         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.tech_stack_names %> </dd>
       </div>
       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Participants</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.participant_limit %> </dd>
+        <dt class="text-sm font-medium text-gray-500">Participants <%= "(#{project.participants.count} / #{project.participant_limit})" %></dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.participating_users.map{ |participant| "#{participant.first_name} #{participant.last_name}" }.join(",") %> </dd>
       </div>
 
 
@@ -27,6 +27,7 @@
         <% if action_name != "show" %>
           <%= link_to "Show this project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
           <%= link_to 'Edit this project', edit_project_path(project), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+          <%= render 'join', project: project %>
           <hr class="mt-6">
         <% end %>
       </div>

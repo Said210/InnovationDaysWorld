@@ -32,6 +32,10 @@ class Project < ApplicationRecord
     end
 
     def participating_users
-        self.participants.map(&:user).join(",")
+        self.participants.map(&:user)
+    end
+
+    def is_participating?(user)
+        self.participants.where(user: user).exists?
     end
 end
