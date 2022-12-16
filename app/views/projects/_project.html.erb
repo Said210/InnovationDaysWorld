@@ -1,43 +1,41 @@
-<div class="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 px-1 py-10 border project-card" id="<%= dom_id(project) %>" data-project-target="project">
+<section class="overflow-hidden bg-white rounded-md shadow-md mb-2 p-8 grid grid-cols-12" id="<%= dom_id(project) %>">
   <% flash.each do |type, msg| %>
     <div class="w-full text-white-100 flash-<%=type%>">
       <%= msg %>
     </div>
   <% end %>
-  <div class="px-4 py-5 sm:px-6">
-    <h3 class="text-lg font-medium leading-6 text-gray-900"><%= project.title %></h3>
-    <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= project.owner.first_name %> <%= project.owner.last_name %></p>
+
+  <div class="col-span-2 mr-8">
+    <img src="https://via.placeholder.com/213x153" />
+    <p class="pt-2 text-sm">Edition: <%= project.edition.name %></p>
+    <p class="pt-3 text-sm">Participants: <%= "(#{project.participants.count} / #{project.participant_limit})" %></p>
+    <p class="text-sm"><%= project.participating_users.map{ |participant| "#{participant.first_name} #{participant.last_name}" }.join(",") %></p>
   </div>
-  <div class="border-t border-gray-200">
-    <dl>
-      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Description</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.description %> </dd>
-      </div>
-      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Tech Stach</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 project-techstack"> <%= project.tech_stack_names %> </dd>
-      </div>
-
-      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Participants <%= "(#{project.participants.count} / #{project.participant_limit})" %></dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.participating_users.map{ |participant| "#{participant.first_name} #{participant.last_name}" }.join(",") %> </dd>
-      </div>
-
-      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Edition</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.edition.name %> </dd>
-      </div>
-
-      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <% if action_name != "show" %>
-          <%= link_to "Show this project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-          <%= link_to 'Edit this project', edit_project_path(project), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-          <%= render 'join', project: project %>
-          <hr class="mt-6">
+  <div class="col-span-8">
+    <h2 class="pb-2"><%= project.title %></h2>
+      <p class="pb-2"><%= project.description %></p>
+      <% if action_name != "show" %>
+          <p class="pb-2"><%= link_to "More project details", project %></p>
+          <%#= link_to "Show project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <% end %>
+      <p class="pb-2 text-sm"><span class="font-bold">Created by:</span> 
+      <% if user_signed_in? %> 
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar, style: "display:inline; width: 24px; height: 24px; border-radius: 100%;" %>
+        <% else %>
+          <!-- icon of empty user -->
         <% end %>
-      </div>
-
-    </dl>
+      <% end %>
+      <%= project.owner.first_name %> <%= project.owner.last_name %></p>
+      <hr class="my-2 border-grey-300"/>
+      <p class="text-sm"><%= project.tech_stack_names %></p>
   </div>
-</div>
+  <div class="col-span-2 grid content-end justify-end">
+    <% if action_name != "show" %>
+      <%#= if current user created this project, let them edit project: %>
+      <%= link_to 'Edit project', edit_project_path(project), class: "btn-outline shrink-0 grow-0 inline" %>
+
+      <%= render 'join', project: project %>
+    <% end %>
+  </div>
+</section>
