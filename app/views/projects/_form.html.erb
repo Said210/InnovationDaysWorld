@@ -28,22 +28,22 @@
 
   <div class="my-5">
     <%= form.label :is_winner %>
-    <%= form.check_box :is_winner, class: "block mt-2 h-5 w-5" %>
+    <%= form.check_box :is_winner, class: "h-5 w-5" %>
   </div>
 
   <div class="my-5">
     <%= form.label :tech_stack %>
-    <div id="tags-local" class="block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" data-tech-list="<%= @technologies %>"></div>
+    <div id="tags-local" class="bg-white block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" data-tech-list="<%= @technologies %>"></div>
  
     <%= form.text_field :tech_stack, class: "hidden", value: (project.present? ? project.tech_stack_names : "") %>
   </div>
 
   <div class="my-5">
     <%= form.label :is_open %>
-    <%= form.check_box :is_open, class: "block mt-2 h-5 w-5" %>
+    <%= form.check_box :is_open, class: "h-5 w-5" %>
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer", id: "submit_project" %>
+    <%= form.submit class: "btn inline-block cursor-pointer", id: "submit_project" %>
   </div>
 <% end %>

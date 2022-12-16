@@ -13,20 +13,29 @@
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <script src="https://jsuites.net/v4/jsuites.webcomponents.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700,900&display=swap" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'">
   </head>
 
-  <body>
+  <body class="py-8 bg-grey-100">
     
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if user_signed_in? %> 
-      <div> Welcome <%= current_user.email %> </div> 
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-      <% if current_user.avatar.attached? %>
-        <%= image_tag current_user.avatar, style: "width: 30px; height: 30px; border-radius: 100%;" %>
-      <% end %>
+      <p class="text-right container mx-auto">Hi 
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar, style: "display:inline; width: 30px; height: 30px; border-radius: 100%;" %>
+        <% end %>
+        <%= current_user.first_name %>!
+        <div class="text-right container mx-auto">
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'underline font-light font-montserrat' %>
+        </div>
+      </p> 
+      
     <% else %>
-      <%= link_to "Sign in", new_user_session_path %> 
+      <p class="text-right container mx-auto">
+        <%= link_to "Sign in", new_user_session_path %>  |  <a href="#">Register</a>
+      </p>
     <% end %>
 
     <%= yield %>
