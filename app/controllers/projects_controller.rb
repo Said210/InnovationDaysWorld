@@ -19,11 +19,11 @@ class ProjectsController < ApplicationController
 
   def join
     if Participant.where(user: current_user, project: @project).exists?
-      Participant.where(user: current_user, project: @project).destroy_all
+      Participant.where(user: current_user, project: @project).delete_all
     else
       Participant.create(user: current_user, project: @project)
     end
-    
+
     redirect_to project_url(@project)
   end
 

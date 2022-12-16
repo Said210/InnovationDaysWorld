@@ -25,7 +25,7 @@ class Project < ApplicationRecord
             current_stack.each do |tech|
                 unless new_tech_stack.include?(tech)
                     technology = Technology.find_by(name: tech)
-                    TechStack.where(project: self, technology: technology).destroy_all
+                    TechStack.where(project: self, technology: technology).delete_all
                 end
             end
         end
