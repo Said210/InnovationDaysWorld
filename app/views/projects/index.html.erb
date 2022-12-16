@@ -3,15 +3,15 @@
     <p class="py-2 px-3  bg-primary-500 my-5 text-white font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="mb-8">Innovation Days: Project Roster</h1>
-    <!-- signin/out -->
+  <div class="flex flex-col">
+    <h1 class="mb-8">Innovation Days: Projects</h1>
+    <div class="flex justify-between">
+      <%= render "filters" %>
+    </div>
   </div>
 
-  <!-- Filters -->
-
   <div id="projects" class="min-w-full grid grid-cols-1 gap-4 place-content-center mb-8">
-    <%= render @projects %>
+    <%= render "projects", projects: @projects %>
   </div>
 
   <div class="ml-[25%] w-1/2 text-center bg-white rounded-md shadow-md px-4 py-5 sm:px-6">

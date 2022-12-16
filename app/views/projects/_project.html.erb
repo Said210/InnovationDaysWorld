@@ -1,6 +1,12 @@
 <section class="overflow-hidden bg-white rounded-md shadow-md mb-2 p-8 grid grid-cols-12" id="<%= dom_id(project) %>">
+  <% flash.each do |type, msg| %>
+    <div class="w-full text-white-100 flash-<%= type %>">
+      <%= msg %>
+    </div>
+  <% end %>
   <div class="col-span-2 mr-8">
     <img src="https://via.placeholder.com/213x153" />
+    <p class="pt-2 text-sm">Edition: <%#= project.edition.name %></p>
     <p class="pt-3 text-sm">Participants: <%= "(#{project.participants.count} / #{project.participant_limit})" %></p>
     <p class="text-sm"><%= project.participating_users.map{ |participant| "#{participant.first_name} #{participant.last_name}" }.join(",") %></p>
   </div>

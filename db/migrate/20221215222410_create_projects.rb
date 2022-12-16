@@ -14,11 +14,11 @@ class CreateProjects < ActiveRecord::Migration[7.0]
     create_join_table(:projects, :users, table_name: :participants) do |t|
       t.index :project_id
       t.index :user_id
-      t.integer :role
+      t.integer :role, default: 0
 
       t.timestamps
     end
-    
+
   end
 end
 

@@ -6,6 +6,8 @@ class Project < ApplicationRecord
 
     has_many :technologies, through: :tech_stack
 
+    belongs_to :edition
+
     def tech_stack_names
         TechStack.where(project_id: self.id).joins(:technology).select('technologies.name').map(&:name).join(",")
     end

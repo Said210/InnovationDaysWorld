@@ -8,7 +8,7 @@ export default class extends Controller {
       search: document.getElementById('tags-local').attributes['data-tech-list'].value.split(","),
       placeholder: 'Tech Stack'
     });
-    
+
     tagsLocal.setValue(document.getElementById("project_tech_stack").value);
 
     document.querySelector("#submit_project").addEventListener("click", function(e) {
@@ -16,6 +16,15 @@ export default class extends Controller {
       document.querySelector("#project_tech_stack").value = tagsLocal.getValue();
       document.querySelector("#new_project_form").submit();
     });
+
+    document.addEventListener('turbo:before-stream-render', function(event) {
+      event.preventDefault();
+
+      /* Transition the old frame away ... */
+
+      event.detail.streamElement.performAction();
+      console.log("Frame updated");
+    })
 
   }
 
