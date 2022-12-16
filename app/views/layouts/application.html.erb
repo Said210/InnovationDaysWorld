@@ -22,6 +22,9 @@
     <% if user_signed_in? %> 
       <div> Welcome <%= current_user.email %> </div> 
       <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar, style: "width: 30px; height: 30px; border-radius: 100%;" %>
+      <% end %>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %> 
     <% end %>

@@ -9,4 +9,6 @@ class User < ApplicationRecord
   enum skillset: [:developer, :designer, :other]
   
   has_and_belongs_to_many :projects, through: :participants
+
+  has_one_attached :avatar
 end
