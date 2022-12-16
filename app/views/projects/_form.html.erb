@@ -33,9 +33,9 @@
 
   <div class="my-5">
     <%= form.label :tech_stack %>
-    <div id="tags-local" class="block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"></div>
+    <div id="tags-local" class="block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" data-tech-list="<%= @technologies %>"></div>
  
-    <%= form.text_field :tech_stack, class: "hidden" %>
+    <%= form.text_field :tech_stack, class: "hidden", value: (project.present? ? project.tech_stack_names : "") %>
   </div>
 
   <div class="my-5">
@@ -47,7 +47,3 @@
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer", id: "submit_project" %>
   </div>
 <% end %>
-
-<script>
-
-</script>

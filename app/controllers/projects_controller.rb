@@ -14,17 +14,18 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @technologies = Technology.all.pluck(:name).join(",")
   end
 
   # GET /projects/1/edit
   def edit
+    @technologies = Technology.all.pluck(:name).join(",")
   end
 
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
     @project.owner = current_user
-    
     
 
     respond_to do |format|
@@ -53,6 +54,10 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        
+        new_tech_stack = params[:project][:tech_stack].split(",").map(&:strip)
+        @project.update_tech_stack new_tech_stack
+
         format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else

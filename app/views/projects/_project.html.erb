@@ -1,37 +1,36 @@
-<div id="<%= dom_id project %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= project.title %>
-  </p>
+<div class="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 px-1 py-10 border">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-lg font-medium leading-6 text-gray-900"><%= project.title %></h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= project.owner.first_name %> <%= project.owner.last_name %></p>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500"> Title </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">  </dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Description</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.description %> </dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Tech Stach</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.tech_stack_names %> </dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Participants</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.participant_limit %> </dd>
+      </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= project.description %>
-  </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Participant limit:</strong>
-    <%= project.participant_limit %>
-  </p>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <% if action_name != "show" %>
+          <%= link_to "Show this project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+          <%= link_to 'Edit this project', edit_project_path(project), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+          <hr class="mt-6">
+        <% end %>
+      </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Is winner:</strong>
-    <%= project.is_winner %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Tech stack:</strong>
-    <%= project.tech_stack %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Is open:</strong>
-    <%= project.is_open %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this project', edit_project_path(project), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+    </dl>
+  </div>
 </div>

@@ -18,7 +18,6 @@ class ProjectsTest < ApplicationSystemTestCase
     check "Is open" if @project.is_open
     check "Is winner" if @project.is_winner
     fill_in "Participant limit", with: @project.participant_limit
-    fill_in "Tech stack", with: @project.tech_stack
     fill_in "Title", with: @project.title
     click_on "Create Project"
 
@@ -34,7 +33,6 @@ class ProjectsTest < ApplicationSystemTestCase
     check "Is open" if @project.is_open
     check "Is winner" if @project.is_winner
     fill_in "Participant limit", with: @project.participant_limit
-    fill_in "Tech stack", with: @project.tech_stack
     fill_in "Title", with: @project.title
     click_on "Update Project"
 
