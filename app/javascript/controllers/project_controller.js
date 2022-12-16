@@ -17,15 +17,6 @@ export default class extends Controller {
       document.querySelector("#new_project_form").submit();
     });
 
-    document.addEventListener('turbo:before-stream-render', function(event) {
-      event.preventDefault();
-
-      /* Transition the old frame away ... */
-
-      event.detail.streamElement.performAction();
-      console.log("Frame updated");
-    })
-
   }
 
 }

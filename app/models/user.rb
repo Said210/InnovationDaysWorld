@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :projects
   has_and_belongs_to_many :projects, through: :participants
 
+  has_many :votes
+  has_and_belongs_to_many :projects, through: :votes
+
   has_one_attached :avatar
 
   #meta program funtions based on role

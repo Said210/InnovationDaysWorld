@@ -4,9 +4,11 @@ class Project < ApplicationRecord
     has_many :participants
     has_and_belongs_to_many :users, through: :participants
 
+    has_many :tech_stack
     has_many :technologies, through: :tech_stack
 
     belongs_to :edition
+    has_many :votes
 
     def tech_stack_names
         TechStack.where(project_id: self.id).joins(:technology).select('technologies.name').map(&:name).join(",")

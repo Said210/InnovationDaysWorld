@@ -114,3 +114,20 @@
 .flash-notice {
   @apply bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative;
 }
+
+
+.dropdown-item {
+  padding-top: 1rem;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(188, 188, 188) !important;
+  color: #333 !important;
+}

@@ -4,7 +4,16 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
+    if params[:filter_tech_stack]
+      technology_ids = params[:filter_tech_stack].split(",").map(&:to_i)
+      @projects = TechStack.where(technology_id: technology_ids).includes(:project).map(&:project).uniq
+    end
     @projects = Project.all
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("projects", partial: "projects/projects", locals: { projects: @projects }) }
+    end
   end
 
   # GET /projects/1 or /projects/1.json
