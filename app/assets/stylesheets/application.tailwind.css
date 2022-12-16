@@ -2,12 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+/* Base */
+@layer base {
+  * {
+    @apply font-montserrat;
+  }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a {
+    @apply
+      font-bold
+      leading-none;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  h4 {
+    @apply text-base;
+  }
+
+  h5 {
+    @apply text-sm;
+  }
+
+  h6 {
+    @apply text-xs;
+  }
+
+  p {
+    @apply 
+      font-light
+      text-base;
+  }
+
+  a {
+    @apply 
+      font-light
+      underline
+      text-base;
+  }
+
+  .btn {
+    @apply
+      no-underline
+      mb-2
+      text-lg
+      font-light
+      rounded-lg
+      py-3
+      px-5
+      bg-primary-500
+      text-white
+      inline-block;
+  }
+
+  .btn-outline {
+    @apply
+      no-underline
+      mb-2
+      text-lg
+      font-light
+      rounded-lg
+      py-3
+      px-5
+      bg-white
+      text-primary-500
+      border-primary-500
+      border
+      inline-block;
+  }
+
+  label {
+    @apply 
+      font-light
+      text-base;
+  }
+}
+
+/*
 @layer components {
   .btn-primary {
     @apply py-2 px-4 bg-blue-200;
   }
 }
-
 */
