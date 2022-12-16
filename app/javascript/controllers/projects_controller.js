@@ -31,16 +31,20 @@ export default class extends Controller {
       if(checkbox.checked) { selected_tech_stack.push(checkbox.value) }
     })
     console.log(selected_tech_stack);
-    document.querySelectorAll(".project-card").forEach((project) => {
-      if (selected_tech_stack.length == 0) {
+    if (selected_tech_stack.length == 0) {
+      document.querySelectorAll(".project-card").forEach((project) => {
         project.classList.remove("hidden");
-        return;
-      }
-      selected_tech_stack.forEach((tech) => {
+      });
+      return;
+    }
+    document.querySelectorAll(".project-card").forEach((project) => {
+      project.classList.add("hidden");
+    });
+
+    selected_tech_stack.forEach((tech) => {
+      document.querySelectorAll(".project-card").forEach((project) => {
         if ( project.querySelector(".project-techstack").textContent.includes(tech)  ) {
           project.classList.remove("hidden");
-        } else {
-          project.classList.add("hidden");
         }
       });
     });
