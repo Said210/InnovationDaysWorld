@@ -1,8 +1,36 @@
 .dropdown-content {
-    display: none;
     padding-left: 1rem;
+    animation: dropdown_close 0.2s ease-in-out forwards;
 }
 
 .dropdown-container:hover .dropdown-content {
     display: block;
+    animation: dropdown 0.2s ease-in-out forwards;
+}
+
+@keyframes dropdown {
+    from {
+        opacity: 0;
+        top: 90%;
+    }
+
+    to {
+        opacity: 1;
+        top: 100%;
+   }
+
+}
+
+@keyframes dropdown_close {
+    from {
+        opacity: 1;
+        top: 100%;
+    }
+
+    to {
+        opacity: 0;
+        top: 90%;
+        display: none;
+   }
+
 }

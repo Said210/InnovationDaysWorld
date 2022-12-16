@@ -1,4 +1,4 @@
-<div class="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 px-1 py-10 border" id="<%= dom_id(project) %>">
+<div class="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 px-1 py-10 border project-card" id="<%= dom_id(project) %>" data-project-target="project">
   <% flash.each do |type, msg| %>
     <div class="w-full text-white-100 flash-<%=type%>">
       <%= msg %>
@@ -16,7 +16,7 @@
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">Tech Stach</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> <%= project.tech_stack_names %> </dd>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 project-techstack"> <%= project.tech_stack_names %> </dd>
       </div>
 
       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
