@@ -45,8 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_205302) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "project_id"
-    t.index ["project_id"], name: "index_editions_on_project_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -124,7 +122,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_205302) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "editions", "projects"
   add_foreign_key "participants", "editions"
   add_foreign_key "projects", "editions"
   add_foreign_key "tech_stacks", "projects"

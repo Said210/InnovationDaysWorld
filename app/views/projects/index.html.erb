@@ -11,7 +11,11 @@
   </div>
 
   <div id="projects" class="min-w-full grid grid-cols-1 gap-4 place-content-center mb-8">
-    <%= render "projects", projects: @projects %>
+    
+    <% if !@projects.empty? %>
+      <%= render "projects", projects: @projects %>
+    <% end %>
+    
   </div>
 
   <div class="ml-[25%] w-1/2 text-center bg-white rounded-md shadow-md px-4 py-5 sm:px-6">

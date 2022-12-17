@@ -80,3 +80,5 @@ gem "foreman", "~> 0.87.2"
 gem "cancancan", "~> 3.4"
 
 gem "image_processing", "~> 1.12"
+
+gem "sass-rails", "~> 6.0"

@@ -1,21 +1,18 @@
 <% if user_signed_in? %>
-  <% if user_signed_in? && !project.is_participating?(current_user) %>
+  <% if (current_user.exec? || current_user.admin?) %>
 
-  <% if current_user.exec? || current_user.admin? %>
+    <%= button_to 'Vote Project', vote_project_path(project), method: :post, class: "text-sm rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block join-project-button", data: {project_id: project.id}  %>
+
+  <% else %>
 
     <% if !project.is_participating?(current_user) %>
       <%#= link_to 'Join project', edit_project_path(project), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-      <%= button_to 'Join Project', join_project_path(project), method: :post, class: "btn join-project-button", data: {project_id: project.id}  %>
+      <%= button_to 'Join Project', join_project_path(project), method: :post, class: "text-sm btn join-project-button", data: {project_id: project.id}  %>
     <% else %>
-      <%= button_to 'Leave project', leave_project_path(project), method: :post, class: "btn-outline bg-red-100",  data: {project_id: project.id}   %>
+      <%= button_to 'Leave project', leave_project_path(project), method: :post, class: "text-sm btn-outline bg-red-100",  data: {project_id: project.id}   %>
     <% end %>
-
-  <% else %>
-    <%= button_to 'Vote Project', vote_project_path(project), method: :post, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block join-project-button", data: {project_id: project.id}  %>
   <% end %>
-
+  
 <% else %>
-  <%= link_to 'Sign in to join', new_user_session_path, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-  <%#= button_to 'Vote Project', vote_project_path(project), method: :post, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium join-project-button", data: {project_id: project.id}  %>
-
+  <%= link_to 'Sign in to join', new_user_session_path, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium text-sm" %>
 <% end %>

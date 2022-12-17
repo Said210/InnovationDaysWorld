@@ -1,0 +1,5 @@
+<% if current_user.hasnt_voted? %>
+  <%= button_to 'Vote Project', vote_project_path(project), method: :post, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block join-project-button", data: {project_id: project.id}  %>
+<% else %>
+  <%= button_to 'Cancel Vote', cancel_vote_path(project), method: :post, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block join-project-button", data: {project_id: project.id}  %>
+<% end %>

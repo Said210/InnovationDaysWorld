@@ -1,6 +1,6 @@
-<section class="overflow-hidden bg-white rounded-md shadow-md mb-2 p-8 grid grid-cols-12" id="<%= dom_id(project) %>">
+<section class="overflow-hidden bg-white rounded-md shadow-md mb-2 p-8 grid grid-cols-12 project-card" id="<%= dom_id(project) %>">
   <% flash.each do |type, msg| %>
-    <div class="w-full text-white-100 flash-<%=type%>">
+    <div class="text-white-100 flash flash-<%=type%>" style=" display: block; grid-column: 1; grid-column-end: 12;">
       <%= msg %>
     </div>
   <% end %>
@@ -28,13 +28,13 @@
       <% end %>
       <%= project.owner.first_name %> <%= project.owner.last_name %></p>
       <hr class="my-2 border-grey-300"/>
-      <p class="text-sm"><%= project.tech_stack_names %></p>
+      <p class="text-sm project-techstack "><%= project.tech_stack_names %></p>
   </div>
   <div class="col-span-2 grid content-end justify-end">
-    <% if action_name != "show" %>
-      <%#= if current user created this project, let them edit project: %>
-      <%= link_to 'Edit project', edit_project_path(project), class: "btn-outline shrink-0 grow-0 inline" %>
-
+    <% if user_signed_in?
+      <% if project.owner == current_user || current_user.is_team_leader?(project) %>
+        <%= link_to 'Edit project', edit_project_path(project), class: "btn-outline shrink-0 grow-0 inline text-sm" %>
+      <% end %>
       <%= render 'join', project: project %>
     <% end %>
   </div>

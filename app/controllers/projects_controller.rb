@@ -58,6 +58,29 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def vote
+    if Vote.where(user: current_user, edition: Edition.current_edition).exists?
+      flash.now[:alert] = "You've already voted, please cancel your vote first."
+    else      
+      flash.now[:success] = "You've sent your vote."
+      Vote.create(user: current_user, project: @project, edition: Edition.current_edition)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to project_url(@project) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/project", locals: { project: @project }) }
+    end
+  end
+
+  def cancel_vote
+    if Vote.where(user: current_user, edition: Edition.current_edition).exists?
+      Vote.where(user: current_user, edition: Edition.current_edition).delete_all
+      flash.now[:notice] = "You've cancelled your vote."
+    else
+      flash.now[:alert] = "You haven't voted yet."
+    end
+  end
+
   # GET /projects/1/edit
   def edit
     @technologies = Technology.all.pluck(:name).join(",")

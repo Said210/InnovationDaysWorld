@@ -7,7 +7,8 @@ class Ability
     can :read, Project
     can :create, Project
     can :update, Project, owner: user
-
+    can :update, Project, participants: { user: user }
+    
     admin_abliity if user.role == "admin?"
     # Define abilities for the user here. For example:
     #
