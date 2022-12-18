@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy join leave]
+  before_action :set_project, only: %i[ show edit update destroy join leave vote cancel_vote]
   before_action :authenticate_user!, except: %i[index show]
 
   # GET /projects or /projects.json
@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
   def vote
     if Vote.where(user: current_user, edition: Edition.current_edition).exists?
       flash.now[:alert] = "You've already voted, please cancel your vote first."
-    else      
+    else
       flash.now[:success] = "You've sent your vote."
       Vote.create(user: current_user, project: @project, edition: Edition.current_edition)
     end
@@ -78,6 +78,11 @@ class ProjectsController < ApplicationController
       flash.now[:notice] = "You've cancelled your vote."
     else
       flash.now[:alert] = "You haven't voted yet."
+    end
+
+    respond_to do |format|
+      format.html { redirect_to project_url(@project) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/project", locals: { project: @project }) }
     end
   end
 

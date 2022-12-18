@@ -1,5 +1,8 @@
-<% if current_user.hasnt_voted? %>
-  <%= button_to 'Vote Project', vote_project_path(project), method: :post, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block join-project-button", data: {project_id: project.id}  %>
+<span class='text-sm align-center'>
+  Votes: <%= project.votes.count %> <br><br>
+</span>
+<% unless current_user.has_voted_for?(project) %>
+  <%= button_to 'Vote Project', vote_project_path(project), method: :post, class: "text-sm btn join-project-button", data: {project_id: project.id}  %>
 <% else %>
-  <%= button_to 'Cancel Vote', cancel_vote_path(project), method: :post, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block join-project-button", data: {project_id: project.id}  %>
+  <%= button_to 'Cancel Vote', cancel_vote_path(project), method: :post, class: "text-sm btn-outline bg-red-100", data: {project_id: project.id}  %>
 <% end %>

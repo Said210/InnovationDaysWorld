@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
 
   def has_voted_for?(project)
-    Vote.where(user: self, project: project).exists?
+    Vote.where(user_id: self.id, project_id: project.id).exists?
   end
 
   def has_voted?
@@ -46,5 +46,5 @@ class User < ApplicationRecord
   def is_team_leader?(project)
     Participant.where(user: self, project: project, role: :team_lead).exists?
   end
-  
+
 end
