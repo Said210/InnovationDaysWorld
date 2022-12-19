@@ -9,6 +9,8 @@ class ProjectsController < ApplicationController
       @projects = TechStack.where(technology_id: technology_ids).includes(:project).map(&:project).uniq
     end
     @projects = Project.all
+    # sort projects by date
+    @projects = @projects.sort_by(&:created_at).reverse
 
     respond_to do |format|
       format.html
@@ -95,6 +97,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.owner = current_user
+    @project.edition = Edition.current_edition
 
 
     respond_to do |format|

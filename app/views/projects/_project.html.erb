@@ -13,20 +13,22 @@
   </div>
   <div class="col-span-8">
     <h2 class="pb-2"><%= project.title %></h2>
+    <p class="pb-2 text-sm text-gray-200">
+      <% if user_signed_in? %>
+        <% if project.owner.avatar.attached? %>
+          <%= image_tag project.owner.avatar, style: "display:inline; width: 24px; height: 24px; border-radius: 100%;" %>
+        <% else %>
+          <!-- icon of empty user -->
+        <% end %>
+      <% end %>
+      <%= project.owner.first_name %> <%= project.owner.last_name %>
+    </p>
       <p class="pb-2"><%= project.description %></p>
       <% if action_name != "show" %>
           <p class="pb-2"><%= link_to "More project details", project %></p>
           <%#= link_to "Show project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <% end %>
-      <p class="pb-2 text-sm"><span class="font-bold">Created by:</span>
-      <% if user_signed_in? %>
-        <% if current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar, style: "display:inline; width: 24px; height: 24px; border-radius: 100%;" %>
-        <% else %>
-          <!-- icon of empty user -->
-        <% end %>
-      <% end %>
-      <%= project.owner.first_name %> <%= project.owner.last_name %></p>
+
       <hr class="my-2 border-grey-300"/>
       <br>
       <p class="text-sm project-techstack "><%= project.tech_stack_names %></p>

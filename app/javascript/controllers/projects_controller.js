@@ -18,10 +18,6 @@ export default class extends Controller {
       })
     });
 
-    document.getElementById("filter_button").addEventListener("click", (event) => {
-      console.log("Filter button clicked", event);
-      this.filter_projects();
-    });
   }
 
   filter_projects() {

@@ -18,20 +18,20 @@
   </head>
 
   <body class="py-8 bg-grey-100">
-    
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %> 
-      <p class="text-right container mx-auto">Hi 
+    <% if user_signed_in? %>
+      <p class="text-right container mx-auto">Hi
         <% if current_user.avatar.attached? %>
           <%= image_tag current_user.avatar, style: "display:inline; width: 30px; height: 30px; border-radius: 100%;" %>
         <% end %>
         <%= current_user.first_name %>!
         <div class="text-right container mx-auto">
-          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'underline font-light font-montserrat' %>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'underline font-light font-montserrat', data:{turbo: false} %>
         </div>
-      </p> 
-      
+      </p>
+
     <% else %>
       <p class="text-right container mx-auto">
         <%= link_to "Sign in", new_user_session_path %>  |  <a href="#">Register</a>

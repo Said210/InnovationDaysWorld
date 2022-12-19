@@ -26,15 +26,17 @@
     <%= form.number_field :participant_limit, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :is_winner %>
-    <%= form.check_box :is_winner, class: "h-5 w-5" %>
-  </div>
+  <% if user_signed_in? && current_user.exec? %>
+    <div class="my-5">
+      <%= form.label :is_winner %>
+      <%= form.check_box :is_winner, class: "h-5 w-5" %>
+    </div>
+  <% end %>
 
   <div class="my-5">
     <%= form.label :tech_stack %>
     <div id="tags-local" class="bg-white block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" data-tech-list="<%= @technologies %>"></div>
- 
+
     <%= form.text_field :tech_stack, class: "hidden", value: (project.present? ? project.tech_stack_names : "") %>
   </div>
 
